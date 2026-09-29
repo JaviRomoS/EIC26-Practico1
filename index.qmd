@@ -307,15 +307,19 @@ Por ejemplo, para educación: $\dfrac{\text{asistencia}_{[0,1]} + \text{rezago}_
 #| label: paso6
 datos <- datos %>%
   mutate(
-    d_educacion = rowMeans(across(c(asistencia, rezago, escolaridad))),
-    d_salud     = rowMeans(across(c(malnutricion, adscripcion, atencion))),
-    d_trabajo   = rowMeans(across(c(ocupacion, seguridad_social, jubilaciones))),
-    d_vivienda  = rowMeans(across(c(habitabilidad, servicios_basicos, entorno))),
-    d_redes     = rowMeans(across(c(apoyo_participacion, trato_igualitario, seguridad)))
+    d_educacion = rowMeans(across(c(asistencia, rezago, escolaridad)), na.rm = TRUE),
+    d_salud     = rowMeans(across(c(malnutricion, adscripcion, atencion)), na.rm = TRUE),
+    d_trabajo   = rowMeans(across(c(ocupacion, seguridad_social, jubilaciones)), na.rm = TRUE),
+    d_vivienda  = rowMeans(across(c(habitabilidad, servicios_basicos, entorno)), na.rm = TRUE),
+    d_redes     = rowMeans(across(c(apoyo_participacion, trato_igualitario, seguridad)), na.rm = TRUE)
   )
 
 frq(round(datos$d_educacion, 2))
 ```
+
+::: nota
+`na.rm = TRUE`: si a un hogar le falta un indicador (por ejemplo, porque no aplica), la dimensión se calcula con los **indicadores disponibles**. Así no dejamos fuera del análisis a ciertos tipos de hogares.
+:::
 
 ## Paso 7: se ponderan y suman las dimensiones
 
@@ -356,7 +360,7 @@ datos <- datos %>%
 
 ## ¿Qué nos quedó?
 
-Un **índice con valores del 0 al 1** que indican el grado de carencias (ponderadas) que tiene cada hogar.
+Un **índice con valores del 0 al 1** que indican el grado de carencias que tiene cada hogar.
 
 ```{r}
 #| label: histograma
@@ -381,7 +385,7 @@ grafico_indice
 ```
 
 ::: nota
-**Ejemplo:** si un hogar tiene **0,30** en el índice, este hogar posee un 30% de carencias ponderadas (respecto al total del índice).
+**Ejemplo:** si un hogar tiene **0,30** en el índice, este hogar posee un 30% de carencias (respecto al total del índice).
 :::
 
 ## ¿Qué podemos hacer con esto?
@@ -411,7 +415,7 @@ En la medida oficial el umbral es **22,5%**: el equivalente a tener carencias en
 
 ## ¿Dónde cae el umbral?
 
-Los hogares a la **derecha** de la línea roja (22,5% o más de carencias ponderadas) quedan clasificados como **pobres multidimensionales**.
+Los hogares a la **derecha** de la línea roja (22,5% o más de carencias ponderadas) quedan clasificados como **hogares en pobreza multidimensional**.
 
 ```{r}
 #| label: histograma-umbral

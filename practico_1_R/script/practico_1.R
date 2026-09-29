@@ -6,7 +6,7 @@
 
 # ------------------------------------------------------------------------ #
 #   PRÁCTICO 1: ÍNDICE DE POBREZA MULTIDIMENSIONAL (5 DIMENSIONES)          #
-#   casen: Encuesta CASEN 2024                                              #
+#   Encuesta CASEN 2024                                                     #
 # ------------------------------------------------------------------------ #
 
 # PASO 1: Base de casen y documentación -----------------------------------
@@ -99,16 +99,21 @@ casen <- casen %>%
 
 # PASO 6: Promediar cada dimensión ----------------------------------------
 
+# na.rm = TRUE: si a un hogar le falta un indicador (por ejemplo, porque no le
+# aplica), la dimensión se promedia con los indicadores disponibles.
+# Ej.: si en educación sólo hay 2 de 3 indicadores -> (a + b) / 2.
+# Así evitamos excluir sistemáticamente a ciertos tipos de hogares.
+
 casen <- casen %>%
   mutate(
-    d_educacion = rowMeans(across(c(asistencia, rezago, escolaridad))),
-    d_salud     = rowMeans(across(c(malnutricion, adscripcion, atencion))),
-    d_trabajo   = rowMeans(across(c(ocupacion, seguridad_social, jubilaciones))),
-    d_vivienda  = rowMeans(across(c(habitabilidad, servicios_basicos, entorno))),
-    d_redes     = rowMeans(across(c(apoyo_participacion, trato_igualitario, seguridad)))
+    d_educacion = rowMeans(across(c(asistencia, rezago, escolaridad)), na.rm = TRUE),
+    d_salud     = rowMeans(across(c(malnutricion, adscripcion, atencion)), na.rm = TRUE),
+    d_trabajo   = rowMeans(across(c(ocupacion, seguridad_social, jubilaciones)), na.rm = TRUE),
+    d_vivienda  = rowMeans(across(c(habitabilidad, servicios_basicos, entorno)), na.rm = TRUE),
+    d_redes     = rowMeans(across(c(apoyo_participacion, trato_igualitario, seguridad)), na.rm = TRUE)
   )
 
-frq(casen$d_educacion)   # valores posibles: 0, 0.33, 0.67, 1
+frq(casen$d_educacion)   # valores posibles: 0, 0.33, 0.5, 0.67, 1
 
 
 # PASO 7: Ponderar y sumar las dimensiones -------------------------------

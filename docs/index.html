@@ -459,26 +459,30 @@ Value |      Label |      N | Raw % | Valid % | Cum. %
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href=""></a>datos <span class="ot">&lt;-</span> datos <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href=""></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-3"><a href=""></a>    <span class="at">d_educacion =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(asistencia, rezago, escolaridad))),</span>
-<span id="cb7-4"><a href=""></a>    <span class="at">d_salud     =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(malnutricion, adscripcion, atencion))),</span>
-<span id="cb7-5"><a href=""></a>    <span class="at">d_trabajo   =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(ocupacion, seguridad_social, jubilaciones))),</span>
-<span id="cb7-6"><a href=""></a>    <span class="at">d_vivienda  =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(habitabilidad, servicios_basicos, entorno))),</span>
-<span id="cb7-7"><a href=""></a>    <span class="at">d_redes     =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(apoyo_participacion, trato_igualitario, seguridad)))</span>
+<span id="cb7-3"><a href=""></a>    <span class="at">d_educacion =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(asistencia, rezago, escolaridad)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-4"><a href=""></a>    <span class="at">d_salud     =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(malnutricion, adscripcion, atencion)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-5"><a href=""></a>    <span class="at">d_trabajo   =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(ocupacion, seguridad_social, jubilaciones)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-6"><a href=""></a>    <span class="at">d_vivienda  =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(habitabilidad, servicios_basicos, entorno)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-7"><a href=""></a>    <span class="at">d_redes     =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(apoyo_participacion, trato_igualitario, seguridad)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb7-8"><a href=""></a>  )</span>
 <span id="cb7-9"><a href=""></a></span>
 <span id="cb7-10"><a href=""></a><span class="fu">frq</span>(<span class="fu">round</span>(datos<span class="sc">$</span>d_educacion, <span class="dv">2</span>))</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
-# total N=218367 valid N=218192 mean=0.10 sd=0.17
+# total N=218367 valid N=218260 mean=0.10 sd=0.17
 
 Value |      N | Raw % | Valid % | Cum. %
 -----------------------------------------
- 0.00 | 153861 | 70.46 |   70.52 |  70.52
+ 0.00 | 153925 | 70.49 |   70.52 |  70.52
  0.33 |  60601 | 27.75 |   27.77 |  98.29
+ 0.50 |      4 |  0.00 |    0.00 |  98.29
  0.67 |   3571 |  1.64 |    1.64 |  99.93
  1.00 |    159 |  0.07 |    0.07 | 100.00
- &lt;NA&gt; |    175 |  0.08 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+ &lt;NA&gt; |    107 |  0.05 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
+</div>
+<div class="nota">
+<p><code>na.rm = TRUE</code>: si a un hogar le falta un indicador (por ejemplo, porque no aplica), la dimensión se calcula con los <strong>indicadores disponibles</strong>. Así no dejamos fuera del análisis a ciertos tipos de hogares.</p>
 </div>
 </section>
 <section class="slide level2">
@@ -517,10 +521,10 @@ Value |      N | Raw % | Valid % | Cum. %
 </section>
 <section class="slide level2">
 <h2>¿Qué nos quedó?</h2>
-<p>Un <strong>índice con valores del 0 al 1</strong> que indican el grado de carencias (ponderadas) que tiene cada hogar.</p>
+<p>Un <strong>índice con valores del 0 al 1</strong> que indican el grado de carencias que tiene cada hogar.</p>
 
 <img data-src="index_files/figure-revealjs/histograma-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1056"><div class="nota">
-<p><strong>Ejemplo:</strong> si un hogar tiene <strong>0,30</strong> en el índice, este hogar posee un 30% de carencias ponderadas (respecto al total del índice).</p>
+<p><strong>Ejemplo:</strong> si un hogar tiene <strong>0,30</strong> en el índice, este hogar posee un 30% de carencias (respecto al total del índice).</p>
 </div>
 </section>
 <section class="slide level2">
@@ -546,7 +550,7 @@ Value |      N | Raw % | Valid % | Cum. %
 </section>
 <section class="slide level2">
 <h2>¿Dónde cae el umbral?</h2>
-<p>Los hogares a la <strong>derecha</strong> de la línea roja (22,5% o más de carencias ponderadas) quedan clasificados como <strong>pobres multidimensionales</strong>.</p>
+<p>Los hogares a la <strong>derecha</strong> de la línea roja (22,5% o más de carencias ponderadas) quedan clasificados como <strong>hogares en pobreza multidimensional</strong>.</p>
 
 <img data-src="index_files/figure-revealjs/histograma-umbral-1.png" class="quarto-figure quarto-figure-center r-stretch" width="1056"></section>
 <section class="slide level2">
@@ -560,13 +564,13 @@ Value |      N | Raw % | Valid % | Cum. %
 <span id="cb10-6"><a href=""></a><span class="fu">frq</span>(datos<span class="sc">$</span>pobreza_pm)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
-# total N=218367 valid N=216666 mean=0.15 sd=0.36
+# total N=218367 valid N=218260 mean=0.15 sd=0.36
 
 Value |      N | Raw % | Valid % | Cum. %
 -----------------------------------------
-    0 | 183315 | 83.95 |   84.61 |  84.61
-    1 |  33351 | 15.27 |   15.39 | 100.00
- &lt;NA&gt; |   1701 |  0.78 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+    0 | 184687 | 84.58 |   84.62 |  84.62
+    1 |  33573 | 15.37 |   15.38 | 100.00
+ &lt;NA&gt; |    107 |  0.05 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -595,7 +599,7 @@ Value |      N | Raw % | Valid % | Cum. %
 <pre><code># A tibble: 2 × 3
   area   indice_promedio pct_pobreza
   &lt;fct&gt;            &lt;dbl&gt;       &lt;dbl&gt;
-1 Urbano           0.101        13.1
+1 Urbano           0.101        13.0
 2 Rural            0.139        26.5</code></pre>
 </div>
 </div>
