@@ -1,0 +1,17 @@
+# Base completa CASEN 2024 (~1,5 GB): no cabe en GitHub
+practico_1_R/input/casen_2024.RData
+
+# Resultados que generan los estudiantes
+practico_1_R/output/*
+!practico_1_R/output/.gitkeep
+
+# R / RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+
+# Quarto
+/.quarto/
+
+**/*.quarto_ipynb

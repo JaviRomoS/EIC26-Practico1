@@ -1,0 +1,19 @@
+project:
+  type: default
+  output-dir: docs
+  render:
+    - index.qmd
+  resources:
+    - practico_1_R.zip
+
+lang: es
+
+execute:
+  echo: true
+  warning: false
+  message: false
+  freeze: auto
+
+knitr:
+  opts_knit:
+    root.dir: "practico_1_R"

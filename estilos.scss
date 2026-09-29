@@ -1,0 +1,77 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@400;600;800&family=League+Spartan:wght@800&display=swap');
+
+$body-bg: #eeeeee;
+$body-color: #222222;
+$link-color: #2f5fb3;
+$font-family-sans-serif: "Mulish", sans-serif;
+$presentation-font-size-root: 32px;
+$presentation-heading-font: "Mulish", sans-serif;
+$presentation-heading-color: #222222;
+$presentation-heading-font-weight: 800;
+$presentation-h2-font-size: 1.45em;
+$code-block-bg: #fafafa;
+$code-block-border-color: #d0d0d0;
+$code-block-font-size: 0.62em;
+$code-color: #2f5fb3;
+
+/*-- scss:rules --*/
+
+.reveal h2 { text-align: center; line-height: 1.15; }
+.reveal .subtitulo { text-align: center; font-weight: 800; font-size: .7em; color: #444; margin-top: -.4em; }
+.reveal .centrado { text-align: center; }
+.reveal .grande { font-size: 1.25em; font-weight: 800; text-align: center; line-height: 1.4; }
+.reveal .chico { font-size: .7em; }
+.reveal .muted { color: #666; }
+.reveal .fuente { font-size: .5em; color: #555; margin-top: .6em; }
+
+/* Portada */
+.portada-top { display: flex; align-items: center; gap: 36px; background: #fff; margin: -40px -60px 0; padding: 30px 60px; }
+.portada-top img { height: 170px; margin: 0 !important; }
+.portada-top p { font-size: .55em; font-weight: 600; line-height: 1.5; margin: 0; }
+.portada-curso { text-align: center; font-weight: 600; font-size: 1.05em; margin-top: 1em; line-height: 1.3; }
+.portada-taller { font-family: "League Spartan", sans-serif; font-size: 3.1em; text-align: center; line-height: .95; text-transform: uppercase; margin-top: .3em; }
+.portada-tema { text-align: center; font-size: .9em; color: #555; border-top: 2px solid #222; padding-top: .5em; margin: .6em 40px 0; }
+
+/* Paso */
+.paso { font-size: 1.05em; }
+.paso b, .paso strong { font-weight: 800; }
+
+/* Diagrama de dimensiones (réplica de los cuadros del Ministerio) */
+.dims { display: grid; gap: 14px; margin-top: .6em; }
+.dims.c4 { grid-template-columns: repeat(4, 1fr); }
+.dims.c5 { grid-template-columns: repeat(5, 1fr); }
+.dim .cab { background: #4472c4; color: #fff; border-radius: 8px; padding: 10px 6px; text-align: center; font-size: .62em; font-weight: 700; line-height: 1.25; min-height: 3.4em; display: flex; flex-direction: column; justify-content: center; }
+.dim .ind { border: 2px solid #2f5496; color: #2f5496; background: #fff; border-radius: 8px; padding: 10px 6px; margin: 12px 0 0 14px; text-align: center; font-size: .56em; line-height: 1.2; min-height: 3.3em; display: flex; align-items: center; justify-content: center; }
+.dim .ind code { color: #2f5496; font-size: .9em; background: none; }
+
+/* Árbol del índice */
+.arbol { text-align: center; }
+.arbol .raiz { display: inline-block; background: #d9d9d9; border-radius: 22px; padding: 12px 40px; font-weight: 800; font-size: .9em; }
+.arbol .hojas { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 18px; }
+.arbol .hoja { background: #fff; border-radius: 22px; padding: 16px 6px; font-weight: 800; font-size: .6em; min-height: 3.2em; display: flex; align-items: center; justify-content: center; }
+.arbol .rango { font-size: .5em; margin-top: 6px; }
+
+/* Fórmula */
+.formula { text-align: center; font-size: .9em; margin: .5em 0; }
+
+/* Recuadros */
+.nota { background: #fff; border-left: 6px solid #4472c4; padding: 14px 20px; font-size: .7em; border-radius: 4px; }
+.alerta { background: #fff; border-left: 6px solid #ef5350; padding: 14px 20px; font-size: .7em; border-radius: 4px; }
+
+/* Tablas */
+.reveal table { font-size: .55em; }
+.reveal table th { background: #4472c4; color: #fff; }
+
+/* Código */
+.reveal pre code { line-height: 1.35; max-height: none; }
+.reveal div.cell-output pre code { font-size: 1em; }
+
+/* Descarga */
+.reveal a.boton { display: inline-block; background: #222; color: #fff !important; padding: 14px 30px; border-radius: 10px; font-weight: 800; }
+
+/* Diapositivas de sección */
+.reveal .seccion-texto { position: absolute; top: 50%; left: 0; right: 0; transform: translateY(-50%); font-size: 1.35em; font-weight: 800; text-align: center; line-height: 1.35; padding: 0 60px; }
+
+.reveal .codigo-chico pre code { font-size: .88em; }
